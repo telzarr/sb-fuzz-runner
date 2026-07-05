@@ -1,0 +1,44 @@
+[project]
+name = "sb-fuzz-runner"
+version = "0.1.0"
+description = "Orchestrator for running fuzzing jobs safely and reproducibly in isolated containers."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "typer>=0.9.0",
+    "pydantic>=2.4.0",
+    "docker>=6.1.0",
+    "sqlalchemy>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-mock>=3.11.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+]
+api = [
+    "fastapi>=0.103.0",
+    "uvicorn>=0.23.0",
+]
+
+[project.scripts]
+sbf = "sbf.cli:app"
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["sbf*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+warn_unused_ignores = true
